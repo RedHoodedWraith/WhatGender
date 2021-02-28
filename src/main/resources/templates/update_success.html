@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Add New Entity</title>
+</head>
+
+<body>
+
+<h1>Successfully Updated Gender</h1>
+<p th:text="'Current Gender: ' + ${sub.getGender()}" />
+<a href="/update">Change Gender Again</a>
+<a href="/">View Current Gender</a>
+</body>
+</html>

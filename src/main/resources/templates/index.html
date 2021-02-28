@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Rowan Rathod">
+    <title th:text="'What Gender is ' + ${personal_name} + ' Today?'"></title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
+
+    <!-- MDB CSS -->
+    <link href="../static/css/mdb.min.css" th:href="@{/css/mdb.min.css}" rel="stylesheet" />
+
+    <style th:inline="css">
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+
+    <!-- Additional Custom CSS -->
+    <link href="../static/css/localcss/local.css" th:href="@{/css/localcss/local.css}" rel="stylesheet" />
+</head>
+
+<body class="cover-container text-center text-white" th:style="'background-color:' + ${backdrop_colour}">
+
+    <div class="main-content d-grid gap-5 position-absolute top-50 start-50 translate-middle">
+
+        <div class="gender-report p-4 animation fade-in">
+            <h2 class="fw-light" th:inline="text">
+                Right Now, [[${personal_name}]] is
+            </h2>
+            <h1 th:text="${current_gender}"></h1>
+        </div>
+
+        <div class="pronoun-report p-4 animation fade-in">
+            <h2 class="fw-light">Pronouns to use are</h2>
+            <h1 th:text="${current_pronouns}"></h1>
+        </div>
+
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script type="text/javascript" th:src="@{/js/bootstrap.bundle.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/mdb.min.js}"></script>
+
+</body>
+</html>
