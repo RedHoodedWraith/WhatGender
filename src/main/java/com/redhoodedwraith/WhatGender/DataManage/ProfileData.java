@@ -26,7 +26,7 @@ public class ProfileData {
 
         setGenderColour(genderOptions.get(MALE), "#020122");
         setGenderColour(genderOptions.get(NON_BINARY), "#067575");
-        setGenderColour(genderOptions.get(FEMALE), "#D00000");
+        setGenderColour(genderOptions.get(FEMALE), "#db1a4d");
     }
 
     public static void addGenderOption(Gender gender) {
