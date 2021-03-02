@@ -1,3 +1,11 @@
 .main-content h1 {
     font-size: 3em;
 }
+
+.nav-link {
+    color: #ffffff;
+}
+
+.nav-link:hover {
+    color: darkgray;
+}
