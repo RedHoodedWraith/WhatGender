@@ -1,6 +1,6 @@
 package com.redhoodedwraith.WhatGender.Controllers;
 
-import com.redhoodedwraith.WhatGender.DataManage.ProfileData;
+import com.redhoodedwraith.WhatGender.DataManage.ProfileLoader;
 import com.redhoodedwraith.WhatGender.DataManage.UpdateSubmission;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,9 +13,9 @@ public class BackendController {
 
     @GetMapping("/update")
     public String updateGender(Model model) {
-        model.addAttribute("personal_name", ProfileData.getDisplayName())
-                .addAttribute("current_gender", ProfileData.getGenderLabel())
-                .addAttribute("gender_opts", ProfileData.getGenderOptions())
+        model.addAttribute("personal_name", ProfileLoader.getDisplayName())
+                .addAttribute("current_gender", ProfileLoader.getGenderLabel())
+                .addAttribute("gender_opts", ProfileLoader.getGenderOptions())
         .addAttribute("sub", new UpdateSubmission());
         return "update";
     }
@@ -30,7 +30,7 @@ public class BackendController {
 
         System.out.println("Gender Received: " + sub.getGender());
 
-        ProfileData.setCurrentGender(sub.convertToGender());
+        ProfileLoader.setCurrentGender(sub.convertToGender());
 
         return "update_success";
     }

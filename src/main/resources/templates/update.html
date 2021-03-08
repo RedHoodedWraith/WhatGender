@@ -12,7 +12,7 @@
 <form action="#" th:action="@{/update}" th:object="${sub}" method="post">
     <select th:field="*{gender}" th:required="true">
         <option value=""> --- </option>
-        <option th:each="gender : ${T(com.redhoodedwraith.WhatGender.DataManage.ProfileData).getGenderOptions()}"
+        <option th:each="gender : ${T(com.redhoodedwraith.WhatGender.DataManage.ProfileLoader).getGenderOptions()}"
                 th:value="${gender.getGenderName()}" th:text="${gender.getGenderName()}"></option>
     </select>
     <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>

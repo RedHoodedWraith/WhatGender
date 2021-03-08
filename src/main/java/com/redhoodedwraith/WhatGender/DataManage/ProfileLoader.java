@@ -7,17 +7,24 @@ import java.util.Collection;
 import java.util.HashMap;
 
 @Service
-public class ProfileData {
+public class ProfileLoader {
+
+    public static UserRepository repository;
 
     public static String
             MALE="Male",
         FEMALE="Female",
         NON_BINARY="Non-Binary";
 
-    private static String displayName;
+    private static String preferredName;
+    private static String fullName;
     private static Gender currentGender;
 
     private static final HashMap<String, Gender> genderOptions = new HashMap<>();
+
+    public ProfileLoader(UserRepository repository) {
+        ProfileLoader.repository = repository;
+    }
 
     public static void initialiseDefaultGenderOptions() {
         addGenderOption(new Gender(NON_BINARY, new Pronouns("They", "Them", "Their")));
@@ -34,11 +41,19 @@ public class ProfileData {
     }
 
     public static String getDisplayName() {
-        return displayName;
+        return preferredName;
     }
 
     public static void setDisplayName(String newDisplayName) {
-        displayName = newDisplayName;
+        preferredName = newDisplayName;
+    }
+
+    public static String getFullName() {
+        return fullName;
+    }
+
+    public static void setFullName(String fullName) {
+        ProfileLoader.fullName = fullName;
     }
 
     public static void setCurrentGender(Gender g){
@@ -80,4 +95,5 @@ public class ProfileData {
     public static Gender getGenderFromOptions(String gender) {
         return genderOptions.get(gender);
     }
+
 }

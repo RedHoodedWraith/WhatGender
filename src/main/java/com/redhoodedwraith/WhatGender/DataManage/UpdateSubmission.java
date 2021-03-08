@@ -15,7 +15,7 @@ public class UpdateSubmission {
         if(gender == null || gender.equals(""))
             throw new NullPointerException("Gender Key is Null");
 
-        Gender g = ProfileData.getGenderFromOptions(gender);
+        Gender g = ProfileLoader.getGenderFromOptions(gender);
         if(g == null)
             throw new NullPointerException("Gender Object is Null. Tried fetching: " + gender);
         return g;
