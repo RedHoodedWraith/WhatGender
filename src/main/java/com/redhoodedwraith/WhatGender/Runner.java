@@ -12,9 +12,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class Runner implements CommandLineRunner {
 
     public static void main(String... args){
-//        ProfileData.setDisplayName("Rowan Rathod");
-//        ProfileData.initialiseDefaultGenderOptions();
-//        ProfileData.setCurrentGender(ProfileData.MALE);
+        ProfileLoader.setDisplayName("Rowan Rathod");
+        ProfileLoader.initialiseDefaultGenderOptions();
+        ProfileLoader.setCurrentGender(ProfileLoader.MALE);
         SpringApplication.run(Runner.class, args);
     }
 
