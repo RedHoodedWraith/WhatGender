@@ -4,96 +4,96 @@ import org.springframework.stereotype.Service;
 
 import java.awt.*;
 import java.util.Collection;
-import java.util.HashMap;
+import java.util.Optional;
 
 @Service
 public class ProfileLoader {
 
     public static UserRepository repository;
-
-    public static String
-            MALE="Male",
-        FEMALE="Female",
-        NON_BINARY="Non-Binary";
-
-    private static String preferredName;
-    private static String fullName;
-    private static Gender currentGender;
-
-    private static final HashMap<String, Gender> genderOptions = new HashMap<>();
+    private static UserProfile currentProfile;
 
     public ProfileLoader(UserRepository repository) {
         ProfileLoader.repository = repository;
     }
 
-    public static void initialiseDefaultGenderOptions() {
-        addGenderOption(new Gender(NON_BINARY, new Pronouns("They", "Them", "Their")));
-        addGenderOption(new Gender(MALE, new Pronouns("He", "Him", "His")));
-        addGenderOption(new Gender(FEMALE, new Pronouns("She", "Her", "Hers")));
+    public static Long addNewUserProfile(UserProfile p) {
+        ProfileLoader.repository.save(p);
+        return p.getID();
+    }
 
-        setGenderColour(genderOptions.get(MALE), "#020122");
-        setGenderColour(genderOptions.get(NON_BINARY), "#067575");
-        setGenderColour(genderOptions.get(FEMALE), "#db1a4d");
+    public static boolean loadUserProfile(Long userID) {
+        Optional<UserProfile> p = ProfileLoader.repository.findById(userID);
+
+        if(p.isEmpty()){
+            return false;
+        }
+
+        currentProfile = p.get();
+        return true;
     }
 
     public static void addGenderOption(Gender gender) {
-        genderOptions.put(gender.getGenderName(), gender);
+        currentProfile.addGender(gender);
     }
 
     public static String getDisplayName() {
-        return preferredName;
+        return currentProfile.getNameToDisplay();
     }
 
     public static void setDisplayName(String newDisplayName) {
-        preferredName = newDisplayName;
+        currentProfile.setNameToDisplay(newDisplayName);
     }
 
     public static String getFullName() {
-        return fullName;
+        return currentProfile.getFullName();
     }
 
     public static void setFullName(String fullName) {
-        ProfileLoader.fullName = fullName;
+        currentProfile.setFullName(fullName);
     }
 
     public static void setCurrentGender(Gender g){
-        currentGender = g;
+        currentProfile.setCurrentGender(g);
     }
 
     public static void setCurrentGender(String gkey) {
-        Gender g = genderOptions.get(gkey);
-        if(g == null){
-            throw new NullPointerException("Gender Key Not Found");
-        }
-        setCurrentGender(g);
+        currentProfile.setCurrentGender(gkey);
     }
 
-    public static void setGenderColour(Gender g, String hex) {
+    public static void changeGenderColour(Gender g, String hex) {
         g.setColour(hex);
     }
 
-    public static void setGenderColour(Gender g, Color col) {
+    public static void changeGenderColour(Gender g, Color col) {
         g.setColour(col);
     }
 
     public static String getGenderLabel() {
-        return currentGender.getGenderName();
+        return currentProfile.getCurrentGender().getGenderName();
     }
 
-    public static String getPronouns() {
-        return currentGender.getDefaultPronouns().getPronounString();
+    public static String getPronounsLabel() {
+        return currentProfile.getCurrentPronouns().getPronounString();
     }
 
     public static String getColourHex() {
-        return currentGender.getColourHex();
+        return currentProfile.getCurrentGender().getColourHex();
     }
 
     public static Collection<Gender> getGenderOptions() {
-        return genderOptions.values();
+        return currentProfile.getGenderOptions();
     }
 
-    public static Gender getGenderFromOptions(String gender) {
-        return genderOptions.get(gender);
+    public static Gender getGenderFromOptions(String genderKey) {
+        return currentProfile.getGenderByName(genderKey);
+    }
+
+    public static Collection<Pronouns> getPronounOptions() {
+        return currentProfile.getPronounOptions();
+    }
+
+    public static Pronouns getPronounsFromOptions(String pronounsKey) {
+        return currentProfile.getPronounsByName(pronounsKey);
     }
 
 }

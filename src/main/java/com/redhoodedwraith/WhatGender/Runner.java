@@ -18,8 +18,7 @@ public class Runner implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        ProfileLoader.setDisplayName("Rowan Rathod");
-        ProfileLoader.initialiseDefaultGenderOptions();
-        ProfileLoader.setCurrentGender(ProfileLoader.MALE);
+        Long id = ProfileLoader.addNewUserProfile(new UserProfile("Rowan Rathod", "Rowan"));
+        ProfileLoader.loadUserProfile(id);
     }
 }

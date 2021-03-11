@@ -13,7 +13,7 @@ public class FrontendController {
         model
                 .addAttribute("personal_name", ProfileLoader.getDisplayName())
         .addAttribute("current_gender", ProfileLoader.getGenderLabel())
-        .addAttribute("current_pronouns", ProfileLoader.getPronouns())
+        .addAttribute("current_pronouns", ProfileLoader.getPronounsLabel())
         .addAttribute("backdrop_colour", ProfileLoader.getColourHex()
         );
 

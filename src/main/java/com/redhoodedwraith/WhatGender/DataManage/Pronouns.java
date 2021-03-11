@@ -3,6 +3,12 @@ package com.redhoodedwraith.WhatGender.DataManage;
 import java.util.*;
 
 public class Pronouns {
+
+    public static final Pronouns
+            PRONOUNS_THEY = new Pronouns("They", "Them", "Their"),
+            PRONOUNS_HE = new Pronouns("He", "Him", "His"),
+            PRONOUNS_SHE = new Pronouns("She", "Her", "Hers");
+
     private final String pronounsString;
     private final LinkedHashSet<String> pronounParts = new LinkedHashSet<>();
 
