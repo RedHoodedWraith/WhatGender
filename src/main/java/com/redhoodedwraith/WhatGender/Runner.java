@@ -12,15 +12,14 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class Runner implements CommandLineRunner {
 
     public static void main(String... args){
-        ProfileLoader.setDisplayName("Rowan Rathod");
-        ProfileLoader.initialiseDefaultGenderOptions();
-        ProfileLoader.setCurrentGender(ProfileLoader.MALE);
         SpringApplication.run(Runner.class, args);
     }
 
 
     @Override
     public void run(String... args) throws Exception {
-
+        ProfileLoader.setDisplayName("Rowan Rathod");
+        ProfileLoader.initialiseDefaultGenderOptions();
+        ProfileLoader.setCurrentGender(ProfileLoader.MALE);
     }
 }

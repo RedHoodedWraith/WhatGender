@@ -1,15 +1,17 @@
 package com.redhoodedwraith.WhatGender.DataManage;
 
+
 import java.awt.*;
 
 public class Gender {
     private final String genderName;
     private Pronouns defaultPronouns;
-    private Color colour;
+    private final HexColour colour;
 
     public Gender(String genderName, Pronouns pronouns) {
         this.genderName = genderName;
         setDefaultPronouns(pronouns);
+        this.colour = new HexColour();
     }
 
     public String getGenderName() {
@@ -24,23 +26,23 @@ public class Gender {
         this.defaultPronouns = defaultPronouns;
     }
 
-    public Color getColour() {
+    public HexColour getColourHexObj() {
         return colour;
     }
 
+    public Color getJavaColorObj() {
+        return this.colour.getJavaColor();
+    }
+
     public void setColour(Color colour) {
-        this.colour = colour;
+        this.colour.setColour(colour);
     }
 
     public void setColour(String hexCode) {
-        colour = Color.decode(hexCode);
+        colour.setColour(hexCode);
     }
 
     public String getColourHex() {
-        return String.format("#%02X%02X%02X",
-                colour.getRed(),
-                colour.getGreen(),
-                colour.getBlue()
-        );
+        return colour.getHexColourCode();
     }
 }
