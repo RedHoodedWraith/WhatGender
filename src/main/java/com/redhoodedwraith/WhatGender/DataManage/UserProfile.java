@@ -21,7 +21,7 @@ public class UserProfile {
     private final HashMap<String, Pronouns> pronounsOptions = new HashMap<>();
 
     public UserProfile() {
-        initialiseDefaultGenderOptions(this);
+        this.initialiseDefaultGenderOptions();
     }
 
     public UserProfile(String fullName, String preferredName) {
@@ -107,6 +107,10 @@ public class UserProfile {
         this.removePronouns(pronoun_key_to_remove);
     }
 
+    public boolean hasGender(String genderName) {
+        return this.genderOptions.containsKey(genderName);
+    }
+
     public Gender getGenderByName(String genderName) {
         return this.genderOptions.get(genderName);
     }
@@ -123,10 +127,15 @@ public class UserProfile {
         return this.pronounsOptions.values();
     }
 
-    public static void initialiseDefaultGenderOptions(UserProfile profile) {
-        profile.addGender(new Gender(NON_BINARY, PRONOUNS_THEY, DEFAULT_NON_BINARY_COLOUR));
-        profile.addGender(new Gender(MALE, PRONOUNS_HE, DEFAULT_MALE_COLOUR));
-        profile.addGender(new Gender(FEMALE, PRONOUNS_SHE, DEFAULT_FEMALE_COLOUR));
+    public void initialiseDefaultGenderOptions() {
+        if(!this.hasGender(NON_BINARY))
+            this.addGender(new Gender(NON_BINARY, PRONOUNS_THEY, DEFAULT_NON_BINARY_COLOUR));
+
+        if(!this.hasGender(MALE))
+            this.addGender(new Gender(MALE, PRONOUNS_HE, DEFAULT_MALE_COLOUR));
+
+        if(!this.hasGender(FEMALE))
+            this.addGender(new Gender(FEMALE, PRONOUNS_SHE, DEFAULT_FEMALE_COLOUR));
     }
 
 }
