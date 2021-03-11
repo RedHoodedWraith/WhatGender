@@ -18,7 +18,11 @@ public class Runner implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+        System.out.println("\nDeleting Repository...\n");
+        ProfileLoader.repository.deleteAll();
+        System.out.println("\nAdding First User...\n");
         Long id = ProfileLoader.addNewUserProfile(new UserProfile("Rowan Rathod", "Rowan"));
         ProfileLoader.loadUserProfile(id);
+        ProfileLoader.printUserSummary();
     }
 }

@@ -6,6 +6,9 @@ import java.awt.*;
 import java.util.Collection;
 import java.util.Optional;
 
+import static com.redhoodedwraith.WhatGender.DataManage.DataDefaults.*;
+
+
 @Service
 public class ProfileLoader {
 
@@ -17,6 +20,7 @@ public class ProfileLoader {
     }
 
     public static Long addNewUserProfile(UserProfile p) {
+        initialiseDefaultGenderOptions(p);
         ProfileLoader.repository.save(p);
         return p.getID();
     }
@@ -96,4 +100,26 @@ public class ProfileLoader {
         return currentProfile.getPronounsByName(pronounsKey);
     }
 
+    public static void initialiseDefaultGenderOptions(UserProfile p) {
+        if(p == null)
+            return;
+
+        if(!p.hasGender(GENDER_UKNOWN))
+            p.addGender(new Gender(GENDER_UKNOWN, PRONOUNS_THEY, DEFAULT_UNKOWN_COLOUR));
+
+        if(!p.hasGender(NON_BINARY))
+            p.addGender(new Gender(NON_BINARY, PRONOUNS_THEY, DEFAULT_NON_BINARY_COLOUR));
+
+        if(!p.hasGender(MALE))
+            p.addGender(new Gender(MALE, PRONOUNS_HE, DEFAULT_MALE_COLOUR));
+
+        if(!p.hasGender(FEMALE))
+            p.addGender(new Gender(FEMALE, PRONOUNS_SHE, DEFAULT_FEMALE_COLOUR));
+
+        p.setCurrentGender(GENDER_UKNOWN);
+    }
+
+    public static void printUserSummary() {
+        System.out.println(currentProfile);
+    }
 }

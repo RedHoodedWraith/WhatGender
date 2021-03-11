@@ -1,20 +1,28 @@
 package com.redhoodedwraith.WhatGender.DataManage;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.PersistenceConstructor;
+
 import java.util.*;
 
 public class Pronouns {
 
-    public static final Pronouns
-            PRONOUNS_THEY = new Pronouns("They", "Them", "Their"),
-            PRONOUNS_HE = new Pronouns("He", "Him", "His"),
-            PRONOUNS_SHE = new Pronouns("She", "Her", "Hers");
-
+    @Id
+    public Long id;
     private final String pronounsString;
-    private final LinkedHashSet<String> pronounParts = new LinkedHashSet<>();
+    private final LinkedHashSet<String> pronounParts;
+
+    @PersistenceConstructor
+    public Pronouns(String pronounsString, LinkedHashSet<String> pronounParts){
+        this.pronounParts = pronounParts;
+        this.pronounsString = pronounsString;
+        pronounParts.addAll(Arrays.asList(this.pronounsString.split("/")));
+    }
 
     public Pronouns(String... p){
         // Saves Pronouns to List
         int size1 = p.length;
+        pronounParts = new LinkedHashSet<>();
         pronounParts.addAll(Arrays.asList(p).subList(0, size1));
 
         // Builds All Pronouns as Single String separated by

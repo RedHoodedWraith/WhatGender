@@ -5,8 +5,6 @@ import org.springframework.data.annotation.Id;
 import java.util.Collection;
 import java.util.HashMap;
 
-import static com.redhoodedwraith.WhatGender.DataManage.Gender.*;
-import static com.redhoodedwraith.WhatGender.DataManage.Pronouns.*;
 
 public class UserProfile {
 
@@ -17,11 +15,12 @@ public class UserProfile {
     private String preferredName;
     private Gender currentGender;
     private Pronouns currentPronouns;
-    private final HashMap<String, Gender> genderOptions = new HashMap<>();
-    private final HashMap<String, Pronouns> pronounsOptions = new HashMap<>();
+    private HashMap<String, Gender> genderOptions;
+    private HashMap<String, Pronouns> pronounsOptions;
 
     public UserProfile() {
-        this.initialiseDefaultGenderOptions();
+        this.genderOptions = new HashMap<>();
+        this.pronounsOptions = new HashMap<>();
     }
 
     public UserProfile(String fullName, String preferredName) {
@@ -33,7 +32,8 @@ public class UserProfile {
 
     @Override
     public String toString() {
-        return String.format("User[id='%s', preferredName='%s']", id, preferredName);
+        return String.format("User[id='%s', preferredName='%s', fullName='%s', pronouns='%s', genders='%s']",
+                id, preferredName, fullName, pronounsOptions.keySet(), genderOptions.keySet());
     }
 
     public Long getID() {
@@ -79,7 +79,9 @@ public class UserProfile {
     }
 
     public void addPronouns(Pronouns p) {
-        this.pronounsOptions.put(p.getPronounString(), p);
+        String ps = p.getPronounString();
+        this.pronounsOptions.put(ps, p);
+        this.currentPronouns = getPronounsByName(ps);
     }
 
     public void removePronouns(String pronounsToRemove) {
@@ -98,8 +100,11 @@ public class UserProfile {
     }
 
     public void addGender(Gender gender) {
-        this.genderOptions.put(gender.getGenderName(), gender);
-        this.addPronouns(gender.getDefaultPronouns());
+        String gn = gender.getGenderName();
+        this.genderOptions.put(gn, gender);
+        Gender newGender = getGenderByName(gn);
+        this.addPronouns(newGender.getDefaultPronouns());
+        this.currentGender = this.genderOptions.get(newGender.getGenderName());
     }
 
     public void removeGender(String genderToRemove) {
@@ -127,15 +132,11 @@ public class UserProfile {
         return this.pronounsOptions.values();
     }
 
-    public void initialiseDefaultGenderOptions() {
-        if(!this.hasGender(NON_BINARY))
-            this.addGender(new Gender(NON_BINARY, PRONOUNS_THEY, DEFAULT_NON_BINARY_COLOUR));
-
-        if(!this.hasGender(MALE))
-            this.addGender(new Gender(MALE, PRONOUNS_HE, DEFAULT_MALE_COLOUR));
-
-        if(!this.hasGender(FEMALE))
-            this.addGender(new Gender(FEMALE, PRONOUNS_SHE, DEFAULT_FEMALE_COLOUR));
+    public void setGenderOptions(HashMap<String, Gender> genderOptions) {
+        this.genderOptions = genderOptions;
     }
 
+    public void setPronounsOptions(HashMap<String, Pronouns> pronounsOptions) {
+        this.pronounsOptions = pronounsOptions;
+    }
 }

@@ -1,29 +1,24 @@
 package com.redhoodedwraith.WhatGender.DataManage;
 
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.PersistenceConstructor;
+
 import java.awt.*;
 
 public class Gender {
 
-    public static String
-            MALE="Male",
-            FEMALE="Female",
-            NON_BINARY="Non-Binary";
-
-    public static String
-            DEFAULT_MALE_COLOUR = "#020122",
-            DEFAULT_FEMALE_COLOUR = "#db1a4d",
-            DEFAULT_NON_BINARY_COLOUR = "#067575";
-
-
+    @Id
+    public Long id;
     private final String genderName;
     private Pronouns defaultPronouns;
     private final HexColour colour;
 
-    public Gender(String genderName, Pronouns pronouns, HexColour hexColour) {
+    @PersistenceConstructor
+    public Gender(String genderName, Pronouns defaultPronouns, HexColour colour) {
         this.genderName = genderName;
-        setDefaultPronouns(pronouns);
-        this.colour = hexColour;
+        setDefaultPronouns(defaultPronouns);
+        this.colour = colour;
     }
 
     public Gender(String genderName, Pronouns pronouns) {
