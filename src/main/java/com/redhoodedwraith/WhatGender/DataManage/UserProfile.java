@@ -13,9 +13,9 @@ public class UserProfile {
     private String fullName;
     private String nameToDisplay;
     private String preferredName;
-    private Gender currentGender;
+    private GenderProfile currentGender;
     private Pronouns currentPronouns;
-    private HashMap<String, Gender> genderOptions;
+    private HashMap<String, GenderProfile> genderOptions;
     private HashMap<String, Pronouns> pronounsOptions;
 
     public UserProfile() {
@@ -68,11 +68,11 @@ public class UserProfile {
         return this.genderOptions.containsKey(genderName);
     }
 
-    public Gender getGenderByName(String genderName) {
+    public GenderProfile getGenderByName(String genderName) {
         return this.genderOptions.get(genderName);
     }
 
-    public Gender getCurrentGender() {
+    public GenderProfile getCurrentGender() {
         return this.currentGender;
     }
 
@@ -103,7 +103,7 @@ public class UserProfile {
         this.pronounsOptions.remove(pronounsToRemove);
     }
 
-    public void setCurrentGender(Gender currentGender) {
+    public void setCurrentGender(GenderProfile currentGender) {
         if(genderOptions.containsValue(currentGender)){
             this.currentGender = currentGender;
             this.setCurrentPronouns(currentGender.getDefaultPronouns());
@@ -115,10 +115,10 @@ public class UserProfile {
         this.setCurrentGender(getGenderByName(newCurrentGender));
     }
 
-    public void addGender(Gender gender) {
+    public void addGender(GenderProfile gender) {
         String gn = gender.getGenderName();
         this.genderOptions.put(gn, gender);
-        Gender newGender = getGenderByName(gn);
+        GenderProfile newGender = getGenderByName(gn);
         this.addPronouns(newGender.getDefaultPronouns());
     }
 
@@ -131,7 +131,7 @@ public class UserProfile {
         return this.pronounsOptions.get(pronounsKey);
     }
 
-    public Collection<Gender> getGenderOptions() {
+    public Collection<GenderProfile> getGenderOptions() {
         return this.genderOptions.values();
     }
 
@@ -140,7 +140,7 @@ public class UserProfile {
     }
 
     // Either redundant code or Code that hasn't been completely implemented correctly
-    public void setGenderOptions(HashMap<String, Gender> genderOptions) {
+    public void setGenderOptions(HashMap<String, GenderProfile> genderOptions) {
         this.genderOptions = genderOptions;
     }
 
