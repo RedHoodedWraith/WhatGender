@@ -15,17 +15,17 @@ public class Gender {
     private final HexColour colour;
 
     @PersistenceConstructor
-    public Gender(String genderName, Pronouns defaultPronouns, HexColour colour) {
+    public GenderMode(String genderName, Pronouns defaultPronouns, HexColour colour) {
         this.genderName = genderName;
         setDefaultPronouns(defaultPronouns);
         this.colour = colour;
     }
 
-    public Gender(String genderName, Pronouns pronouns) {
+    public GenderMode(String genderName, Pronouns pronouns) {
         this(genderName, pronouns, new HexColour());
     }
 
-    public Gender(String genderName, Pronouns pronouns, String hexColourCode) {
+    public GenderMode(String genderName, Pronouns pronouns, String hexColourCode) {
         this(genderName, pronouns, new HexColour(hexColourCode));
     }
 
