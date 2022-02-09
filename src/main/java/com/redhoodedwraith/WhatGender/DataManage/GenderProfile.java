@@ -6,7 +6,7 @@ import org.springframework.data.annotation.PersistenceConstructor;
 
 import java.awt.*;
 
-public class Gender {
+public class GenderProfile {
 
     @Id
     public Long id;
@@ -15,17 +15,17 @@ public class Gender {
     private final HexColour colour;
 
     @PersistenceConstructor
-    public Gender(String genderName, Pronouns defaultPronouns, HexColour colour) {
+    public GenderProfile(String genderName, Pronouns defaultPronouns, HexColour colour) {
         this.genderName = genderName;
         setDefaultPronouns(defaultPronouns);
         this.colour = colour;
     }
 
-    public Gender(String genderName, Pronouns pronouns) {
+    public GenderProfile(String genderName, Pronouns pronouns) {
         this(genderName, pronouns, new HexColour());
     }
 
-    public Gender(String genderName, Pronouns pronouns, String hexColourCode) {
+    public GenderProfile(String genderName, Pronouns pronouns, String hexColourCode) {
         this(genderName, pronouns, new HexColour(hexColourCode));
     }
 

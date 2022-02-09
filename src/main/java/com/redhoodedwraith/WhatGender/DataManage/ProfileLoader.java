@@ -36,7 +36,7 @@ public class ProfileLoader {
         return true;
     }
 
-    public static void addGenderOption(Gender gender) {
+    public static void addGenderOption(GenderProfile gender) {
         currentProfile.addGender(gender);
     }
 
@@ -56,7 +56,7 @@ public class ProfileLoader {
         currentProfile.setFullName(fullName);
     }
 
-    public static void setCurrentGender(Gender g){
+    public static void setCurrentGender(GenderProfile g){
         currentProfile.setCurrentGender(g);
     }
 
@@ -64,11 +64,11 @@ public class ProfileLoader {
         currentProfile.setCurrentGender(gkey);
     }
 
-    public static void changeGenderColour(Gender g, String hex) {
+    public static void changeGenderColour(GenderProfile g, String hex) {
         g.setColour(hex);
     }
 
-    public static void changeGenderColour(Gender g, Color col) {
+    public static void changeGenderColour(GenderProfile g, Color col) {
         g.setColour(col);
     }
 
@@ -86,11 +86,11 @@ public class ProfileLoader {
         return currentProfile.getCurrentGender().getColourHex();
     }
 
-    public static Collection<Gender> getGenderOptions() {
+    public static Collection<GenderProfile> getGenderOptions() {
         return currentProfile.getGenderOptions();
     }
 
-    public static Gender getGenderFromOptions(String genderKey) {
+    public static GenderProfile getGenderFromOptions(String genderKey) {
         return currentProfile.getGenderByName(genderKey);
     }
 
@@ -107,16 +107,16 @@ public class ProfileLoader {
             return;
 
         if(!p.hasGender(GENDER_UKNOWN))
-            p.addGender(new Gender(GENDER_UKNOWN, PRONOUNS_THEY, DEFAULT_UNKOWN_COLOUR));
+            p.addGender(new GenderProfile(GENDER_UKNOWN, PRONOUNS_THEY, DEFAULT_UNKOWN_COLOUR));
 
         if(!p.hasGender(NON_BINARY))
-            p.addGender(new Gender(NON_BINARY, PRONOUNS_THEY, DEFAULT_NON_BINARY_COLOUR));
+            p.addGender(new GenderProfile(NON_BINARY, PRONOUNS_THEY, DEFAULT_NON_BINARY_COLOUR));
 
         if(!p.hasGender(MALE))
-            p.addGender(new Gender(MALE, PRONOUNS_HE, DEFAULT_MALE_COLOUR));
+            p.addGender(new GenderProfile(MALE, PRONOUNS_HE, DEFAULT_MALE_COLOUR));
 
         if(!p.hasGender(FEMALE))
-            p.addGender(new Gender(FEMALE, PRONOUNS_SHE, DEFAULT_FEMALE_COLOUR));
+            p.addGender(new GenderProfile(FEMALE, PRONOUNS_SHE, DEFAULT_FEMALE_COLOUR));
 
         p.setCurrentGender(GENDER_UKNOWN);
     }

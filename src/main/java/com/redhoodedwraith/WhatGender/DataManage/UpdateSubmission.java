@@ -15,13 +15,13 @@ public class UpdateSubmission {
         this.gender = gender;
     }
 
-    public Gender convertToGender(){
+    public GenderProfile convertToGender(){
         if(gender == null || gender.equals(""))
-            throw new NullPointerException("Gender Key is Null");
+            throw new NullPointerException("GenderProfile Key is Null");
 
-        Gender g = ProfileLoader.getGenderFromOptions(gender);
+        GenderProfile g = ProfileLoader.getGenderFromOptions(gender);
         if(g == null)
-            throw new NullPointerException("Gender Object is Null. Tried fetching: " + gender);
+            throw new NullPointerException("GenderProfile Object is Null. Tried fetching: " + gender);
         return g;
     }
 
