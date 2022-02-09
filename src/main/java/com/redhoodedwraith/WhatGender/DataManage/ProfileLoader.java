@@ -76,9 +76,13 @@ public class ProfileLoader {
         return currentProfile.getCurrentGender().getGenderName();
     }
 
+    public static String getPreferredName() {
+        return currentProfile.getCurrentGender().getPreferredName();
+    }
+
     public static String getPronounsLabel() {
         String pronounStr = currentProfile.getCurrentPronouns().getPronounString();
-        System.out.println("Gender Fetched: " + currentProfile.getCurrentGender().getGenderName() + " - Fetched Pronouns: " + pronounStr);
+        System.out.println("Gender Fetched: " + currentProfile.getCurrentGender().getGenderName() + " - Fetched Pronouns: " + pronounStr + " - Fetched Name: " + currentProfile.getCurrentGender().getPreferredName());
         return pronounStr;
     }
 
@@ -107,16 +111,16 @@ public class ProfileLoader {
             return;
 
         if(!p.hasGender(GENDER_UKNOWN))
-            p.addGender(new GenderProfile(GENDER_UKNOWN, PRONOUNS_THEY, DEFAULT_UNKOWN_COLOUR));
+            p.addGender(new GenderProfile(GENDER_UKNOWN, PRONOUNS_THEY, DEFAULT_UNKOWN_COLOUR, DEFAULT_NAME));
 
         if(!p.hasGender(NON_BINARY))
-            p.addGender(new GenderProfile(NON_BINARY, PRONOUNS_THEY, DEFAULT_NON_BINARY_COLOUR));
+            p.addGender(new GenderProfile(NON_BINARY, PRONOUNS_THEY, DEFAULT_NON_BINARY_COLOUR, DEFAULT_NAME));
 
         if(!p.hasGender(MALE))
-            p.addGender(new GenderProfile(MALE, PRONOUNS_HE, DEFAULT_MALE_COLOUR));
+            p.addGender(new GenderProfile(MALE, PRONOUNS_HE, DEFAULT_MALE_COLOUR, DEFAULT_NAME));
 
         if(!p.hasGender(FEMALE))
-            p.addGender(new GenderProfile(FEMALE, PRONOUNS_SHE, DEFAULT_FEMALE_COLOUR));
+            p.addGender(new GenderProfile(FEMALE, PRONOUNS_SHE, DEFAULT_FEMALE_COLOUR, DEFAULT_NAME));
 
         p.setCurrentGender(GENDER_UKNOWN);
     }

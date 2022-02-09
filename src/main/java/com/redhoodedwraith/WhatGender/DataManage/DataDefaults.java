@@ -13,6 +13,9 @@ public interface DataDefaults {
             DEFAULT_FEMALE_COLOUR = "#db1a4d",
             DEFAULT_NON_BINARY_COLOUR = "#067575";
 
+    String
+            DEFAULT_NAME = "Unknown Name!";
+
     Pronouns
             PRONOUNS_THEY = new Pronouns("They", "Them", "Their"),
             PRONOUNS_HE = new Pronouns("He", "Him", "His"),

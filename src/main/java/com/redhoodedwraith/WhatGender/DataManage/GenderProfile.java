@@ -11,26 +11,36 @@ public class GenderProfile {
     @Id
     public Long id;
     private final String genderName;
+    private String preferredName;
     private Pronouns defaultPronouns;
     private final HexColour colour;
 
     @PersistenceConstructor
-    public GenderProfile(String genderName, Pronouns defaultPronouns, HexColour colour) {
+    public GenderProfile(String genderName, Pronouns defaultPronouns, HexColour colour, String preferredName) {
         this.genderName = genderName;
         setDefaultPronouns(defaultPronouns);
         this.colour = colour;
+        this.preferredName = preferredName;
     }
 
-    public GenderProfile(String genderName, Pronouns pronouns) {
-        this(genderName, pronouns, new HexColour());
+    public GenderProfile(String genderName, Pronouns pronouns, String preferredName) {
+        this(genderName, pronouns, new HexColour(), preferredName);
     }
 
-    public GenderProfile(String genderName, Pronouns pronouns, String hexColourCode) {
-        this(genderName, pronouns, new HexColour(hexColourCode));
+    public GenderProfile(String genderName, Pronouns pronouns, String hexColourCode, String preferredName) {
+        this(genderName, pronouns, new HexColour(hexColourCode), preferredName);
     }
 
     public String getGenderName() {
         return genderName;
+    }
+
+    public String getPreferredName() {
+        return preferredName;
+    }
+
+    public void setPreferredName(String preferredName) {
+        this.preferredName = preferredName;
     }
 
     public Pronouns getDefaultPronouns() {
