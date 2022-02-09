@@ -7,6 +7,10 @@ public class UpdateSubmission {
         return gender;
     }
 
+    public String getPronouns() {
+        return convertToGender().getDefaultPronouns().getPronounString();
+    }
+
     public void setGender(String gender) {
         this.gender = gender;
     }

@@ -77,7 +77,9 @@ public class ProfileLoader {
     }
 
     public static String getPronounsLabel() {
-        return currentProfile.getCurrentPronouns().getPronounString();
+        String pronounStr = currentProfile.getCurrentPronouns().getPronounString();
+        System.out.println("Gender Fetched: " + currentProfile.getCurrentGender().getGenderName() + " - Fetched Pronouns: " + pronounStr);
+        return pronounStr;
     }
 
     public static String getColourHex() {

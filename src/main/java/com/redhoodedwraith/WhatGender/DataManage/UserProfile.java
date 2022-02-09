@@ -64,6 +64,14 @@ public class UserProfile {
         this.preferredName = preferredName;
     }
 
+    public boolean hasGender(String genderName) {
+        return this.genderOptions.containsKey(genderName);
+    }
+
+    public Gender getGenderByName(String genderName) {
+        return this.genderOptions.get(genderName);
+    }
+
     public Gender getCurrentGender() {
         return this.currentGender;
     }
@@ -73,30 +81,38 @@ public class UserProfile {
     }
 
     public void setCurrentPronouns(Pronouns pronouns) {
-        if(this.pronounsOptions.containsValue(pronouns)) {
+        if(this.pronounsOptions.containsKey(pronouns.getPronounString())) {
             this.currentPronouns = pronouns;
+        } else {
+            System.out.println(pronouns.getPronounString() + " not in pronoun list for user " + this.getFullName());
         }
     }
 
     public void addPronouns(Pronouns p) {
         String ps = p.getPronounString();
         this.pronounsOptions.put(ps, p);
-        this.currentPronouns = getPronounsByName(ps);
+        if(this.pronounsOptions.containsValue(p)) {
+            this.currentPronouns = p;
+            System.out.println("Added Pronouns " + p.getPronounString() + " to user " + this.getFullName());
+        } else {
+            System.out.println(p.getPronounString() + " was not added to pronoun list for user " + this.getFullName());
+        }
     }
 
     public void removePronouns(String pronounsToRemove) {
         this.pronounsOptions.remove(pronounsToRemove);
     }
 
-    public void setCurrentGender(String newCurrentGender) {
-        this.setCurrentGender(getGenderByName(newCurrentGender));
-    }
-
     public void setCurrentGender(Gender currentGender) {
         if(genderOptions.containsValue(currentGender)){
             this.currentGender = currentGender;
             this.setCurrentPronouns(currentGender.getDefaultPronouns());
+            System.out.println("Gender Set: " + this.currentGender.getGenderName() + " - with Pronouns: " + this.getCurrentPronouns().getPronounString());
         }
+    }
+
+    public void setCurrentGender(String newCurrentGender) {
+        this.setCurrentGender(getGenderByName(newCurrentGender));
     }
 
     public void addGender(Gender gender) {
@@ -104,20 +120,11 @@ public class UserProfile {
         this.genderOptions.put(gn, gender);
         Gender newGender = getGenderByName(gn);
         this.addPronouns(newGender.getDefaultPronouns());
-        this.currentGender = this.genderOptions.get(newGender.getGenderName());
     }
 
     public void removeGender(String genderToRemove) {
         String pronoun_key_to_remove = this.genderOptions.remove(genderToRemove).getDefaultPronouns().getPronounString();
         this.removePronouns(pronoun_key_to_remove);
-    }
-
-    public boolean hasGender(String genderName) {
-        return this.genderOptions.containsKey(genderName);
-    }
-
-    public Gender getGenderByName(String genderName) {
-        return this.genderOptions.get(genderName);
     }
 
     public Pronouns getPronounsByName(String pronounsKey) {
@@ -132,10 +139,12 @@ public class UserProfile {
         return this.pronounsOptions.values();
     }
 
+    // Either redundant code or Code that hasn't been completely implemented correctly
     public void setGenderOptions(HashMap<String, Gender> genderOptions) {
         this.genderOptions = genderOptions;
     }
 
+    // Either redundant code or Code that hasn't been completely implemented correctly
     public void setPronounsOptions(HashMap<String, Pronouns> pronounsOptions) {
         this.pronounsOptions = pronounsOptions;
     }

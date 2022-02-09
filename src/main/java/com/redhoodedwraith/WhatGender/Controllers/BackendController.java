@@ -28,7 +28,7 @@ public class BackendController {
 
         model.addAttribute("sub", sub);
 
-        System.out.println("Gender Received: " + sub.getGender());
+//        System.out.println("Gender Received: " + sub.getGender() + " - with Pronouns: " + sub.getPronouns());
 
         ProfileLoader.setCurrentGender(sub.convertToGender());
 
