@@ -111,7 +111,7 @@ public class ProfileLoader {
             return;
 
         if(!p.hasGender(GENDER_UKNOWN))
-            p.addGender(new GenderProfile(GENDER_UKNOWN, PRONOUNS_THEY, DEFAULT_UNKOWN_COLOUR, DEFAULT_NAME));
+            p.addGender(new GenderProfile(GENDER_UKNOWN, PRONOUNS_THEY, DEFAULT_UNKNOWN_COLOUR, DEFAULT_NAME));
 
         if(!p.hasGender(NON_BINARY))
             p.addGender(new GenderProfile(NON_BINARY, PRONOUNS_THEY, DEFAULT_NON_BINARY_COLOUR, DEFAULT_NAME));

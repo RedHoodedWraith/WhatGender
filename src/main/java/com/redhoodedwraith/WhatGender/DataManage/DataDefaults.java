@@ -8,7 +8,7 @@ public interface DataDefaults {
             NON_BINARY="Non-Binary";
 
     String
-            DEFAULT_UNKOWN_COLOUR = "#21003A",
+            DEFAULT_UNKNOWN_COLOUR = "#21003A",
             DEFAULT_MALE_COLOUR = "#020122",
             DEFAULT_FEMALE_COLOUR = "#db1a4d",
             DEFAULT_NON_BINARY_COLOUR = "#067575";
