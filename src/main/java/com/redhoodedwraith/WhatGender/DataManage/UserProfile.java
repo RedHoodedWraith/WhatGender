@@ -12,7 +12,6 @@ public class UserProfile {
     public long id;
     private String fullName;
     private String nameToDisplay;
-    private String preferredName;
     private GenderProfile currentGender;
     private Pronouns currentPronouns;
     private HashMap<String, GenderProfile> genderOptions;
@@ -23,17 +22,15 @@ public class UserProfile {
         this.pronounsOptions = new HashMap<>();
     }
 
-    public UserProfile(String fullName, String preferredName) {
+    public UserProfile(String fullName) {
         this();
         this.fullName = fullName;
-        this.preferredName = preferredName;
-        this.nameToDisplay = this.preferredName;
     }
 
     @Override
     public String toString() {
-        return String.format("User[id='%s', preferredName='%s', fullName='%s', pronouns='%s', genders='%s']",
-                id, preferredName, fullName, pronounsOptions.keySet(), genderOptions.keySet());
+        return String.format("User[id='%s', fullName='%s', pronouns='%s', genders='%s']",
+                id, fullName, pronounsOptions.keySet(), genderOptions.keySet());
     }
 
     public Long getID() {
@@ -57,11 +54,7 @@ public class UserProfile {
     }
 
     public String getPreferredName() {
-        return this.preferredName;
-    }
-
-    public void setPreferredName(String preferredName) {
-        this.preferredName = preferredName;
+        return this.currentGender.getPreferredName();
     }
 
     public boolean hasGender(String genderName) {
