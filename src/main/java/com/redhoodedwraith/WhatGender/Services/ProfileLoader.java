@@ -4,18 +4,24 @@ import com.redhoodedwraith.WhatGender.DataManage.GenderProfile;
 import com.redhoodedwraith.WhatGender.DataManage.Pronouns;
 import com.redhoodedwraith.WhatGender.DataManage.UserProfile;
 import com.redhoodedwraith.WhatGender.DataManage.UserRepository;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Optional;
 
 import static com.redhoodedwraith.WhatGender.DataManage.DataDefaults.*;
 
-
-@Service
-public class ProfileLoader {
+// TODO: Test new implementation
+@Component
+public class ProfileLoader implements UserDetailsService {
 
     public static UserRepository repository;
     private static UserProfile currentProfile;
@@ -30,15 +36,19 @@ public class ProfileLoader {
         return p.getID();
     }
 
-    public static UserProfile loadUserProfile(Long userID) {
-        Optional<UserProfile> p = ProfileLoader.repository.findById(userID);
+    @Override
+    public UserDetails loadUserByUsername(String userEmail) throws UsernameNotFoundException {
+        Optional<UserProfile> p = ProfileLoader.repository.findByEmail(userEmail);
 
         if(p.isEmpty()){
-            throw new UsernameNotFoundException("User not found based on ID: '" + userID + "'");
+            throw new UsernameNotFoundException("User not found based on Email: '" + userEmail + "'");
         }
 
+        ArrayList<GrantedAuthority> authorities = new ArrayList<>();
+        authorities.add(new SimpleGrantedAuthority("user"));
+
         currentProfile = p.get();
-        return currentProfile;
+        return new User(currentProfile.getEmail(), currentProfile.getPassword(), authorities);
     }
 
     public static void addGenderOption(GenderProfile gender) {
@@ -133,4 +143,5 @@ public class ProfileLoader {
     public static void printUserSummary() {
         System.out.println(currentProfile);
     }
+
 }
