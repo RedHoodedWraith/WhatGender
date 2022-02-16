@@ -1,6 +1,6 @@
 package com.redhoodedwraith.WhatGender.Controllers;
 
-import com.redhoodedwraith.WhatGender.DataManage.ProfileLoader;
+import com.redhoodedwraith.WhatGender.Services.ProfileLoader;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

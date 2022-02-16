@@ -1,5 +1,7 @@
 package com.redhoodedwraith.WhatGender.DataManage;
 
+import com.redhoodedwraith.WhatGender.Services.ProfileLoader;
+
 public class UpdateSubmission {
     private String gender;
 

@@ -1,5 +1,10 @@
-package com.redhoodedwraith.WhatGender.DataManage;
+package com.redhoodedwraith.WhatGender.Services;
 
+import com.redhoodedwraith.WhatGender.DataManage.GenderProfile;
+import com.redhoodedwraith.WhatGender.DataManage.Pronouns;
+import com.redhoodedwraith.WhatGender.DataManage.UserProfile;
+import com.redhoodedwraith.WhatGender.DataManage.UserRepository;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.awt.*;
@@ -25,15 +30,15 @@ public class ProfileLoader {
         return p.getID();
     }
 
-    public static boolean loadUserProfile(Long userID) {
+    public static UserProfile loadUserProfile(Long userID) {
         Optional<UserProfile> p = ProfileLoader.repository.findById(userID);
 
         if(p.isEmpty()){
-            return false;
+            throw new UsernameNotFoundException("User not found based on ID: '" + userID + "'");
         }
 
         currentProfile = p.get();
-        return true;
+        return currentProfile;
     }
 
     public static void addGenderOption(GenderProfile gender) {

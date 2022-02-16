@@ -1,6 +1,6 @@
 package com.redhoodedwraith.WhatGender.Controllers;
 
-import com.redhoodedwraith.WhatGender.DataManage.ProfileLoader;
+import com.redhoodedwraith.WhatGender.Services.ProfileLoader;
 import com.redhoodedwraith.WhatGender.DataManage.UpdateSubmission;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
