@@ -10,4 +10,5 @@ public interface UserRepository extends MongoRepository<UserProfile, Long> {
     UserProfile findUserProfileByFullName(String fullName);
     @Override
     Optional<UserProfile> findById(Long aLong);
+    Boolean existsByEmail(String email);
 }

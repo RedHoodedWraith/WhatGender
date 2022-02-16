@@ -1,33 +1,34 @@
 package com.redhoodedwraith.WhatGender.DataManage;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Collection;
 import java.util.HashMap;
 
-
+@Document(collection = "users")
 public class UserProfile {
 
     @Id
     public long id;
+    @Email
+    @NotBlank
     private String email;
+    @NotBlank
     private String password;
     private String fullName;
     private String nameToDisplay;
     private GenderProfile currentGender;
     private Pronouns currentPronouns;
-    private HashMap<String, GenderProfile> genderOptions;
-    private HashMap<String, Pronouns> pronounsOptions;
+    private HashMap<String, GenderProfile> genderOptions = new HashMap<>();
+    private HashMap<String, Pronouns> pronounsOptions = new HashMap<>();
 
-    public UserProfile() {
-        this.genderOptions = new HashMap<>();
-        this.pronounsOptions = new HashMap<>();
-    }
-
-    public UserProfile(String fullName) {
-        this();
-        this.fullName = fullName;
-        this.nameToDisplay = this.fullName;
+    public UserProfile(String email, String password) {
+        this.email = email;
+        this.password = password;
     }
 
     @Override
@@ -38,6 +39,22 @@ public class UserProfile {
 
     public Long getID() {
         return this.id;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getFullName() {
