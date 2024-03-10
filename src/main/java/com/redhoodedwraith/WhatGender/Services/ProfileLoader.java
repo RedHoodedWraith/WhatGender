@@ -4,6 +4,7 @@ import com.redhoodedwraith.WhatGender.DataManage.GenderProfile;
 import com.redhoodedwraith.WhatGender.DataManage.Pronouns;
 import com.redhoodedwraith.WhatGender.DataManage.UserProfile;
 import com.redhoodedwraith.WhatGender.DataManage.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -23,22 +24,16 @@ import static com.redhoodedwraith.WhatGender.DataManage.DataDefaults.*;
 @Component
 public class ProfileLoader implements UserDetailsService {
 
-    public static UserRepository repository;
+    @Autowired
+    public UserRepository repository;
     private static UserProfile currentProfile;
 
-    public ProfileLoader(UserRepository repository) {
-        ProfileLoader.repository = repository;
-    }
-
-    public static Long addNewUserProfile(UserProfile p) {
-        initialiseDefaultGenderOptions(p);
-        ProfileLoader.repository.save(p);
-        return p.getID();
+    public ProfileLoader() {
     }
 
     @Override
     public UserDetails loadUserByUsername(String userEmail) throws UsernameNotFoundException {
-        Optional<UserProfile> p = ProfileLoader.repository.findByEmail(userEmail);
+        Optional<UserProfile> p = repository.findByEmail(userEmail);
 
         if(p.isEmpty()){
             throw new UsernameNotFoundException("User not found based on Email: '" + userEmail + "'");

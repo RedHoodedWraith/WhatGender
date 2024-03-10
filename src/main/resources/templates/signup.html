@@ -13,7 +13,7 @@
 
 
     <!-- Bootstrap core CSS -->
-    <link href="../static/css/bootstrap.min.css" rel="stylesheet">
+    <link th:href="@{/css/bootstrap.min.css}" href="../static/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
         .bd-placeholder-img {
@@ -33,20 +33,20 @@
 
 
     <!-- Custom styles for this template -->
-    <link href="../static/css/localcss/signup.css" rel="stylesheet">
+    <link th:href="@{/css/localcss/signup.css}" href="../static/css/localcss/signup.css" rel="stylesheet">
 </head>
 <body class="text-center">
 
 <main class="form-signup">
-    <form>
-        <img class="mb-4" src="../static/assets/branding/what-gender-logo-white.svg" alt="" width="300">
+    <form action="update_success.html" th:object="${user}", method="POST" enctype="utf8">
+        <img class="mb-4" th:src="@{assets/branding/what-gender-logo-white.svg}" src="../static/assets/branding/what-gender-logo-white.svg" alt="" width="300">
         <h1 class="h3 mb-3 fw-normal">Sign Up</h1>
 
         <label for="inputEmail" class="visually-hidden">Email address</label>
-        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+        <input type="email" th:field="*{email}" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
 
         <label for="inputPassword" class="visually-hidden">Password</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+        <input type="password" th:field="*{password}" id="inputPassword" class="form-control" placeholder="Password" required>
 
         <label for="inputPasswordConfirm" class="visually-hidden">Confirm Password</label>
         <input type="password" id="inputPasswordConfirm" class="form-control" placeholder="Confirm Password" required>

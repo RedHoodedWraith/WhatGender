@@ -1,25 +1,24 @@
 package com.redhoodedwraith.WhatGender.DataManage;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import java.util.Collection;
 import java.util.HashMap;
 
 @Document(collection = "users")
-public class UserProfile {
+public class UserProfile extends User {
 
     @Id
     public long id;
     @Email
     @NotBlank
     private String email;
-    @NotBlank
-    private String password;
     private String fullName;
     private String nameToDisplay;
     private GenderProfile currentGender;
@@ -27,10 +26,11 @@ public class UserProfile {
     private HashMap<String, GenderProfile> genderOptions = new HashMap<>();
     private HashMap<String, Pronouns> pronounsOptions = new HashMap<>();
 
-    public UserProfile(String email, String password) {
-        this.email = email;
-        this.password = password;
+    public UserProfile(String username, String password, Collection<? extends GrantedAuthority> authorities) {
+        super(username, password, true, true, true, true, authorities);
     }
+
+
 
     @Override
     public String toString() {
@@ -50,12 +50,14 @@ public class UserProfile {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
+    @Override
+    public Collection<GrantedAuthority> getAuthorities() {
+        return super.getAuthorities();
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    @Override
+    public String getUsername() {
+        return this.getEmail();
     }
 
     public String getFullName() {
